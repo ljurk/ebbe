@@ -17,13 +17,24 @@ import (
 	"golang.org/x/image/draw"
 )
 
-func OnlyColor(width int, height int, color []string) ([]string, error) {
+func OnlyColor(startingX int, startingY int, width int, height int, color []string, order RenderOrder) ([]string, error) {
 	// Construct message list
+	min1, max1 := startingX, startingX+width
+	min2, max2 := startingY, startingY+height
+	if order.IsVertical() {
+		min1, max1 = startingY, startingY+height
+		min2, max2 = startingX, startingX+width
+	}
+
 	var messages []string
 	for _, col := range color {
-		for y := 0; y < height; y++ {
-			for x := 0; x < width; x++ {
-				messages = append(messages, fmt.Sprintf("PX %d %d %s\n", x, y, col))
+		for y := min1; y < max1; y++ {
+			for x := min2; x < max2; x++ {
+				if order.IsVertical() {
+					messages = append(messages, fmt.Sprintf("PX %d %d %s\n", x, y, col))
+				} else {
+					messages = append(messages, fmt.Sprintf("PX %d %d %s\n", y, x, col))
+				}
 			}
 		}
 	}

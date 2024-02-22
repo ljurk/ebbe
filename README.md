@@ -1,14 +1,43 @@
-# examples
+# ebbe
 
-black white enton
+## completion
+
+zsh
+
 ```
-go run routine.go  -h :1337 -color ffffff,000000 -i ./small/enton.png -packetsize 1
+ebbe completion zsh > /usr/share/zsh/site-functions/_ebbe
 ```
-black white enton with lines instead of dots
+
+## usage
+
+ebbe is a modular application, there are commands to create pixelflut commands and there is one to send data to a pixelflut server.
+
+to combine these commands, you can either pipe them together:
+
 ```
-go run routine.go  -h :1337 -color ffffff,000000 -i ./small/enton.png -packetsize 1024
+ebbe image --image enton.png | ebbe send --host :1337 --input -
 ```
-rainbow enton
+
+or write them to file, merge them with other commands and then send it:
+
 ```
-go run routine.go  -h :1337 -color ff0000,ff7f00,ffff00,00ff00,0000ff,4b0082,9400d3 -i ./small/enton.png -packetsize 1
+ebbe image --image enton.png > data.txt
+ebbe color --color 000000 --color ffffff >> data.txt
+ebbe send --input data.txt
 ```
+
+In the above example the image will fight against the color. To remove all image pixels from color pixels you can run:
+
+```
+ebbe merge --input colors.txt --input image.txt | ebbe send -i -
+```
+
+I've wished to merge raw input, but the command gets to long for the shell. As an alternative, you can pass commands to merge, which will be executed and merged. To run the above example in one statement:
+
+```
+ebbe merge --commands --input "ebbe color --color 000000 --color ffffff" --input "ebbe image --image enton.png" | ebbe send -i -
+```
+
+## examples
+
+[see](/examples)

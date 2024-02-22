@@ -63,12 +63,15 @@ func GetCanvasSize(conn net.Conn) (int, int, error) {
 	return x, y, nil
 }
 
-func SendMessages(conn net.Conn, messages []string, wg *sync.WaitGroup) {
+func SendMessages(conn net.Conn, messages []string, oneshot bool, wg *sync.WaitGroup) {
 	defer wg.Done()
 	defer conn.Close()
 	for {
 		for _, val := range messages {
 			fmt.Fprint(conn, val)
+		}
+		if oneshot {
+			return
 		}
 	}
 }
