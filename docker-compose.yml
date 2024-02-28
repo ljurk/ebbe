@@ -1,0 +1,19 @@
+---
+version: '3.3'
+
+services:
+  worker:
+    image: ebbe
+    build: .
+    environment:
+      EBBE_REDIS_URL: redis://redis:6379/0
+      EBBE_PIXELFLUT_URL: 172.20.0.1:8080
+    scale: 8
+    depends_on:
+      - redis
+
+  redis:
+    image: docker.io/library/redis:latest
+    ports:
+      - 6379:6379
+    restart: always

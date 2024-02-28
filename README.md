@@ -55,6 +55,17 @@ ebbe image --image enton.png | ebbe send -i - --host :1337 -c 16 -p 4096
 
 I reach a throughput of 30 GBit/s when running locally
 
+## cluster
+
+```mermaid
+flowchart LR
+    A[fa:fa-terminal client] -->|sends a list of pixels| redis(fa:fa-database redis)
+    redis -->|reads pixels|worker
+    redis -->|reads pixels|workerX
+    worker --> pixelflut-server
+    workerX --> pixelflut-server
+```
+
 ## examples
 
 [see](/examples)
