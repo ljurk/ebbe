@@ -79,5 +79,5 @@ func init() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	rootCmd.AddCommand(mergeCmd)
+	RootCmd.AddCommand(mergeCmd)
 }

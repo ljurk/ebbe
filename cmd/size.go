@@ -28,5 +28,5 @@ var (
 
 func init() {
 	sizeCmd.Flags().StringVar(&host, "host", ":1337", "address of pixelflut server")
-	rootCmd.AddCommand(sizeCmd)
+	RootCmd.AddCommand(sizeCmd)
 }
