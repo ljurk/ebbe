@@ -1,5 +1,7 @@
 # ebbe
 
+![GitHub CI](https://github.com/ljurk/ebbe/actions/workflows/go.yml/badge.svg)
+
 ## completion
 
 zsh
