@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var rootCmd = &cobra.Command{
+var RootCmd = &cobra.Command{
 	Use:   "ebbe",
 	Short: "A Tool to create Pixelflut commands and send them to a server",
 	Long: `ebbe is a modular application, there are commands to create pixelflut commands and there is one to send data to a pixelflut server.
@@ -26,7 +26,7 @@ In the above example the image will fight against the color. To remove all image
 }
 
 func Execute() {
-	err := rootCmd.Execute()
+	err := RootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
 	}
@@ -34,5 +34,5 @@ func Execute() {
 
 func init() {
 
-	rootCmd.PersistentFlags().BoolP("help", "", false, "help for this command")
+	RootCmd.PersistentFlags().BoolP("help", "", false, "help for this command")
 }

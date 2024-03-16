@@ -45,6 +45,7 @@ func send(messages []string, oneshot bool) {
 	fmt.Printf("Total messages %d\n", len(messages))
 	messages = helper.PacketizeList(messages, packetSize)
 	fmt.Printf("Total packetized messages %d\n", len(messages))
+	helper.PrintByteSize(messages)
 
 	messageParts = helper.SplitList(messages, connections)
 	//fmt.Print(messageParts)
@@ -68,5 +69,5 @@ func init() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	rootCmd.AddCommand(sendCmd)
+	RootCmd.AddCommand(sendCmd)
 }

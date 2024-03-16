@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strings"
 	"time"
+	"unsafe"
 )
 
 func RemoveColorFromList(list1 []string, color string) []string {
@@ -112,4 +113,22 @@ func GenerateRandomColor() string {
 	g := rand.Intn(256)
 	b := rand.Intn(256)
 	return fmt.Sprintf("%02x%02x%02x", r, g, b)
+}
+
+func PrintByteSize(input []string) {
+
+	// Calculate the total byte size
+	totalByteSize := 0
+	for _, str := range input {
+		totalByteSize += len(str)
+	}
+
+	// If you want to include the overhead of the slice header
+	// which is 24 bytes on a 64-bit system
+	totalByteSize += len(input) * int(unsafe.Sizeof(input[0]))
+
+	// Convert bytes to megabytes
+	totalGB := float64(totalByteSize) / (1024 * 1024)
+
+	fmt.Printf("Total size of input: %.2f MB\n", totalGB)
 }

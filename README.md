@@ -1,5 +1,7 @@
 # ebbe
 
+![GitHub CI](https://github.com/ljurk/ebbe/actions/workflows/go.yml/badge.svg)
+
 ## completion
 
 zsh
@@ -36,6 +38,34 @@ I've wished to merge raw input, but the command gets to long for the shell. As a
 
 ```
 ebbe merge --commands --input "ebbe color --color 000000 --color ffffff" --input "ebbe image --image enton.png" | ebbe send -i -
+```
+
+## measure
+
+ebbe features a dummy pixelflut server, which doesnt output anything, but just prints out the throughput.
+
+Start it in one terminal with
+```
+ebbe measure
+```
+
+and then send data to it
+
+```
+ebbe image --image enton.png | ebbe send -i - --host :1337 -c 16 -p 4096
+```
+
+I reach a throughput of 30 GBit/s when running locally
+
+## cluster
+
+```mermaid
+flowchart LR
+    A[fa:fa-terminal client] -->|sends a list of pixels| redis(fa:fa-database redis)
+    redis -->|reads pixels|worker
+    redis -->|reads pixels|workerX
+    worker --> pixelflut-server
+    workerX --> pixelflut-server
 ```
 
 ## examples

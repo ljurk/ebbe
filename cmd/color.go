@@ -49,5 +49,5 @@ func init() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	rootCmd.AddCommand(colorCmd)
+	RootCmd.AddCommand(colorCmd)
 }

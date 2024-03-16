@@ -52,5 +52,5 @@ func init() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	rootCmd.AddCommand(textCmd)
+	RootCmd.AddCommand(textCmd)
 }

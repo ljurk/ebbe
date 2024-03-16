@@ -38,5 +38,5 @@ func init() {
 		fmt.Println(err)
 	}
 
-	rootCmd.AddCommand(imageCmd)
+	RootCmd.AddCommand(imageCmd)
 }
